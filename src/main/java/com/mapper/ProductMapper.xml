@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ProductMapper">
+    <select id="selectAll" resultType="Product">
+        select id,type,name,version,price,img,number,info
+        from product
+    </select>
+    <update id="updateProduct" parameterType="Product">
+        update product set
+        type=#{type},name=#{name},
+        price=#{price},number=#{number},info=#{info}
+        where id=#{id}
+    </update>
+    <insert id="insertProduct" parameterType="Product">
+        insert into product
+        (type, name, version, price, img, number, info)
+        values
+        (#{type},#{name},#{version},#{price},#{img},#{number},#{info})
+    </insert>
+    <delete id="delProduct" parameterType="java.lang.Integer">
+        delete from product
+        where id=#{id}
+    </delete>
+    <select id="likeQuery" parameterType="java.lang.String" resultType="Product">
+        select id,type,name,version,price,img,number,info
+        from product
+        where name like '%${name}%'
+    </select>
+</mapper>
